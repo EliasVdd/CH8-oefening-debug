@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
+/*
+    Deze applicatie maakt gebruik van de angular-in-memory-web-api module
+    Het gebruik van deze module zien we in de volgende lesweek. Je mag er
+    vanuit gaan dat de code & configuratie van deze module correct is.
+*/
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService{
     createDb() {
