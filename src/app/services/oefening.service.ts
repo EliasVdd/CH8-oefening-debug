@@ -5,6 +5,11 @@ import { Oefening } from '../shared/oefening.model';
 import { Vak } from '../shared/vak.model';
 import { HttpClient } from 'selenium-webdriver/http';
 
+/*
+    Deze applicatie maakt gebruik van de angular-in-memory-web-api module
+    Het gebruik van deze module zien we in de volgende lesweek. Je mag er
+    vanuit gaan dat de code & configuratie van deze module correct is.
+*/
 @Injectable()
 export class OefeningService {
     private oefeningUrl: string;
