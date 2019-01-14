@@ -1,20 +1,30 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
+<h2>Oefeningendatabank</h2>
 <ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
+  <li>Er moet een lijst van oefeningen verschijnen</li>
+  <li>Via de checkbox kan je het veld "finished" updaten</li>
+  <li>Gebruik de refresh knop om te testen of de toggle 'finish' gelukt is</li>
+  <li>Bij het verwijderen moet de lijst automatisch vernieuwen</li>
+  <li>Bij het toevoegen wordt de lijst van vakken opgehaald via de service</li>
+  <li>Bij het toevoegen moet de lijst automatisch vernieuwen</li>
 </ul>
+<button (click)="refresh()">Refresh list</button>
+<div class="oef" *ngFor="let oef of oefeningen$">
+  <h1>{{ oef.course }} - {{ oef.name }}</h1>
+  <a [href]="oef.link">Oefeningen op github</a>
+  <input type="checkbox" [checked]="oef.finished" (click)="togggleFinish(oef)" /> Afgewerkt
 
+  <button (click)="delete(oef)" class="delete">delete</button>
+</div>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <h3>Voeg oefeningen toe:</h3>
+  <label>Naam:</label>
+  <input type="text" name="name" [(ngModel)]="name" />
+  <label>Vak:</label>
+  <select name="course" [(ngModel)]="course">
+    <option *ngFor="let vak of vakken | async" [value]="vak.name">{{vak.name}}</option>
+  </select>
+  <label>Github link:</label>
+  <input type="url" name="link" [(ngModel)]="link"/>
+  <input type="submit" value="voeg toe" />
+</form>
